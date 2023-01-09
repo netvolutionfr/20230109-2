@@ -17,15 +17,21 @@ Class Utilisateur
         return date('Y') - $this->anneeNaissance;
     }
 
+    public function incrementeScore() {
+        $this->score++;
+    }
+
     public function afficheUtilisateur() {
-        echo "<h1>$this->prenom $this->nom</h1>";
-        echo "<p>Email : $this->email</p>";
-        echo "<p>Score : $this->score</p>";
-        echo "<p>Ville : $this->ville</p>";
+        echo "<div class=\"utilisateur\">";
+        echo "    <h1>$this->prenom $this->nom</h1>";
+        echo "    <p>Email : $this->email</p>";
+        echo "    <p>Score : $this->score</p>";
+        echo "    <p>Ville : $this->ville</p>";
         $age = $this->age();
-        echo "<p>Age : $age ans</p>";
+        echo "    <p>Age : $age ans</p>";
         $moyenne = $this->moyenneScores();
-        echo "<p>Moyenne des scores : $moyenne</p>";
+        echo "    <p>Moyenne des scores : $moyenne</p>";
+        echo "</div>";
     }
 
     public function ajouteScore() {
@@ -45,6 +51,11 @@ Class Utilisateur
         } else {
             return 0;
         }
+    }
+
+    public function afficheJson() {
+        $json = json_encode($this);
+        echo $json;
     }
 }
 
@@ -66,3 +77,7 @@ $utilisateur->ajouteScore();
 $utilisateur->score = 400;
 
 $utilisateur->afficheUtilisateur();
+
+echo "<pre>";
+$utilisateur->afficheJson();
+echo "</pre>";
